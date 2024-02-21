@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/common/app_style.dart';
 import 'package:multi_vendor_app/common/reusable_text.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
-import 'package:multi_vendor_app/constants/uidata.dart';
+import 'package:multi_vendor_app/models/restaurants.dart';
 
 class RestaurantTile extends StatelessWidget {
-   RestaurantTile({super.key, required this.restaurant});
+  RestaurantTile({super.key, required this.restaurant});
 
-  final dynamic restaurant;
+  final RestaurantModel restaurant;
 
   @override
   Widget build(BuildContext context) {
@@ -37,78 +37,81 @@ class RestaurantTile extends StatelessWidget {
                         SizedBox(
                           width: 65.w,
                           height: 70.h,
-                          child: Image.network(restaurant["imageUrl"], fit: BoxFit.cover),
+                          child: Image.network(restaurant.imageUrl,
+                              fit: BoxFit.cover),
                         ),
                         Positioned(
                             bottom: 0,
                             child: Container(
-                              padding: EdgeInsets.only(left: 6.w, bottom: 2.h,),
+                              padding: EdgeInsets.only(
+                                left: 6.w,
+                                bottom: 2.h,
+                              ),
                               color: kGray.withOpacity(0.6),
                               height: 16.h,
                               width: width,
                               child: RatingBarIndicator(
-                                  rating:5,
-                                  itemCount: 5,
-                                  itemBuilder: (context, i) => Icon(
-                                      Icons.star,
-                                      color: kSecondary,
-                                  ),
+                                rating: 5,
+                                itemCount: 5,
+                                itemBuilder: (context, i) => Icon(
+                                  Icons.star,
+                                  color: kSecondary,
+                                ),
                                 itemSize: 15.h,
                               ),
                             )),
                       ],
                     ),
                   ),
-
                   SizedBox(width: 10.w),
-
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ReusableText(
-                        text: restaurant['title'],
-                          style: appStyle(11, kDark, FontWeight.w400),),
-
+                        text: restaurant.title,
+                        style: appStyle(11, kDark, FontWeight.w400),
+                      ),
                       ReusableText(
-                        text: "Delivery time: ${restaurant['time']}",
+                        text: "Delivery time: ${restaurant.time}",
                         style: appStyle(11, kGray, FontWeight.w400),
                       ),
-                      
                       SizedBox(
                         width: width * 0.7,
-                        child: Text(restaurant['coords']['address'],
-                        overflow: TextOverflow.ellipsis,
-                        style: appStyle(9, kGray, FontWeight.w400),
+                        child: Text(
+                          restaurant.coords.address,
+                          overflow: TextOverflow.ellipsis,
+                          style: appStyle(9, kGray, FontWeight.w400),
                         ),
                       )
                     ],
                   )
-
                 ],
               ),
             ),
           ),
-
           Positioned(
             right: 5.w,
-              top: 6.h,
-              child: Container(
-                width: 60.w,
-                height: 19.h,
-                decoration: BoxDecoration(
-                  color: restaurant['isAvailable'] == true ||
-                      restaurant['isAvailable'] == null
-                      ? kPrimary
-                      : kSecondaryLight,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Center(
-                  child: ReusableText(text: restaurant['isAvailable'] == true ||
-                      restaurant['isAvailable'] == null ? "Open" : "Closed",
-                      style: appStyle(12, kLightWhite, FontWeight.w600)),
-                ),
+            top: 6.h,
+            child: Container(
+              width: 60.w,
+              height: 19.h,
+              decoration: BoxDecoration(
+                color: restaurant.isAvailable == true ||
+                        restaurant.isAvailable == null
+                    ? kPrimary
+                    : kSecondaryLight,
+                borderRadius: BorderRadius.circular(10.r),
               ),
+              child: Center(
+                child: ReusableText(
+                    text: restaurant.isAvailable == true ||
+                            restaurant.isAvailable == null
+                        ? "Open"
+                        : "Closed",
+                    style: appStyle(12, kLightWhite, FontWeight.w600)),
+              ),
+            ),
           )
         ],
       ),

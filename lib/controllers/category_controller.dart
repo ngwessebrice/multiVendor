@@ -1,9 +1,8 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryController extends GetxController{
+class CategoryController extends GetxController {
   RxString category = ''.obs;
 
   String get categoryValue => category.value;

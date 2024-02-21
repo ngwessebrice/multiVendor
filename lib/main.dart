@@ -5,11 +5,10 @@ import 'package:multi_vendor_app/views/entrypoint.dart';
 
 import 'constants/constants.dart';
 
-
-Widget defaultHome =  MainScreen();
-
+Widget defaultHome = MainScreen();
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -22,15 +21,14 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 825),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context , child) {
+      builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Foodly',
           theme: ThemeData(
-            scaffoldBackgroundColor: kOffWhite,
-                iconTheme: const IconThemeData(color: kDark),
-            primarySwatch: Colors.grey
-                ),
+              scaffoldBackgroundColor: kOffWhite,
+              iconTheme: const IconThemeData(color: kDark),
+              primarySwatch: Colors.grey),
           home: defaultHome,
         );
       },

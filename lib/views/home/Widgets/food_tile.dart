@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/common/app_style.dart';
 import 'package:multi_vendor_app/common/reusable_text.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
-import 'package:multi_vendor_app/constants/uidata.dart';
+import 'package:multi_vendor_app/models/food.dart';
 
 class FoodTile extends StatelessWidget {
   FoodTile({super.key, required this.food});
 
-  final dynamic food;
+  final FoodsModel food;
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +37,21 @@ class FoodTile extends StatelessWidget {
                         SizedBox(
                           width: 65.w,
                           height: 70.h,
-                          child: Image.network(food["imageUrl"], fit: BoxFit.cover),
+                          child:
+                              Image.network(food.imageUrl, fit: BoxFit.cover),
                         ),
                         Positioned(
                             bottom: 0,
                             child: Container(
-                              padding: EdgeInsets.only(left: 6.w, bottom: 2.h,),
+                              padding: EdgeInsets.only(
+                                left: 6.w,
+                                bottom: 2.h,
+                              ),
                               color: kGray.withOpacity(0.6),
                               height: 16.h,
                               width: width,
                               child: RatingBarIndicator(
-                                rating:5,
+                                rating: 5,
                                 itemCount: 5,
                                 itemBuilder: (context, i) => Icon(
                                   Icons.star,
@@ -59,44 +63,40 @@ class FoodTile extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   SizedBox(width: 10.w),
-
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ReusableText(
-                        text: food['title'],
-                        style: appStyle(11, kDark, FontWeight.w400),),
-
+                        text: food.title,
+                        style: appStyle(11, kDark, FontWeight.w400),
+                      ),
                       ReusableText(
-                        text: "Delivery time: ${food['time']}",
+                        text: "Delivery time: ${food.time}",
                         style: appStyle(11, kGray, FontWeight.w400),
                       ),
-
                       SizedBox(
                         width: width * 0.7,
                         height: 15.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: food['additives'].length,
-                          itemBuilder: (context, i){
-                            var additive = food['additives'][i];
+                          itemCount: food.additives.length,
+                          itemBuilder: (context, i) {
+                            var additive = food.additives[i];
                             return Container(
                               margin: EdgeInsets.only(right: 5.w),
                               decoration: BoxDecoration(
-                                color: kSecondaryLight,
-                                borderRadius: BorderRadius.all(
+                                  color: kSecondaryLight,
+                                  borderRadius: BorderRadius.all(
                                     Radius.circular(9.r),
-                                )
-                              ),
+                                  )),
                               child: Center(
                                 child: Padding(
-                                    padding: EdgeInsets.all(2.h),
+                                  padding: EdgeInsets.all(2.h),
                                   child: ReusableText(
-                                      text: additive['title'],
-                                      style: appStyle(8, kGray, FontWeight.w400),
+                                    text: additive.title,
+                                    style: appStyle(8, kGray, FontWeight.w400),
                                   ),
                                 ),
                               ),
@@ -106,12 +106,10 @@ class FoodTile extends StatelessWidget {
                       )
                     ],
                   )
-
                 ],
               ),
             ),
           ),
-
           Positioned(
             right: 5.w,
             top: 6.h,
@@ -124,12 +122,11 @@ class FoodTile extends StatelessWidget {
               ),
               child: Center(
                 child: ReusableText(
-                    text: "\$ ${food['price'].toStringAsFixed(2)}",
+                    text: "\$ ${food.price.toStringAsFixed(2)}",
                     style: appStyle(12, kLightWhite, FontWeight.bold)),
               ),
             ),
           ),
-
           Positioned(
             right: 75.w,
             top: 6.h,
@@ -143,7 +140,11 @@ class FoodTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Center(
-                  child: Icon(Icons.add_shopping_cart, size: 15.h, color: kLightWhite,),
+                  child: Icon(
+                    Icons.add_shopping_cart,
+                    size: 15.h,
+                    color: kLightWhite,
+                  ),
                 ),
               ),
             ),

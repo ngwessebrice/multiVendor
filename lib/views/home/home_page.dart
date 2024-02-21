@@ -23,48 +23,42 @@ class HomePage extends StatelessWidget {
       backgroundColor: kPrimary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(130.h),
-       child: const CustomAppBar(),
+        child: const CustomAppBar(),
       ),
       body: SafeArea(
           child: CustomContainer(
               containerContent: Column(
-                children: [CategoryList(),
-                Heading(text: "Nearby restaurants",
-                onTap: () {
-                  Get.to(() => AllNearbyRestaurants(),
+        children: [
+          CategoryList(),
+          Heading(
+            text: "Try Something New",
+            onTap: () {
+              Get.to(() => RecommendationsPage(),
                   transition: Transition.cupertino,
-                    duration: const Duration(milliseconds: 900)
-                  );
-                },
-                ),
-
-                  const NearbyRestaurants(),
-
-                  Heading(text: "Try Something New",
-                    onTap: () {
-                      Get.to(() => RecommendationsPage(),
-                          transition: Transition.cupertino,
-                          duration: const Duration(milliseconds: 900)
-                      );
-                    },
-                  ),
-
-                  const FoodsList(),
-
-                  Heading(text: "Fastest food closer to you",
-                    onTap: () {
-                      Get.to(() => AllFastestFoods(),
-                          transition: Transition.cupertino,
-                          duration: const Duration(milliseconds: 900)
-                      );
-                    },
-                  ),
-
-                  const FoodsList(),
-                ],
-
-              ))
-      ),
+                  duration: const Duration(milliseconds: 900));
+            },
+          ),
+          const FoodsList(),
+          Heading(
+            text: "Nearby restaurants",
+            onTap: () {
+              Get.to(() => AllNearbyRestaurants(),
+                  transition: Transition.cupertino,
+                  duration: const Duration(milliseconds: 900));
+            },
+          ),
+          const NearbyRestaurants(),
+          Heading(
+            text: "Fastest food closer to you",
+            onTap: () {
+              Get.to(() => AllFastestFoods(),
+                  transition: Transition.cupertino,
+                  duration: const Duration(milliseconds: 900));
+            },
+          ),
+          const FoodsList(),
+        ],
+      ))),
     );
   }
 }
